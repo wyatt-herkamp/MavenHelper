@@ -75,6 +75,6 @@ public class CustomMavenBadges {
     }
 
     private void index(Context context) {
-        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString()));
+        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(), "repos", repositories.keySet()));
     }
 }
