@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+
 }
 
 group 'me.kingtux'
@@ -28,4 +29,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+jar {
+    manifest {
+        attributes 'Main-Class' : 'me.kingtux.cmb.CMBMain'
+    }
 }
