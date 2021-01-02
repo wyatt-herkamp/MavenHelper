@@ -1,4 +1,5 @@
-# CustomMavenBadges [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/0-percent-optimized.svg)](https://forthebadge.com) 
+# CustomMavenBadges  [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/0-percent-optimized.svg)](https://forthebadge.com) 
+[![Build Status](https://ci.potatocorp.dev/job/CustomMavenBadges/badge/icon)](https://ci.potatocorp.dev/job/CustomMavenBadges/)
 
 Generate your own Maven Badges!
 
