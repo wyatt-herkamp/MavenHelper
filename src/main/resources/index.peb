@@ -1,9 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Custom Maven Badges</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 </head>
 <body>
-<p>{{url}}</p>
+<div class="ui container" style="margin-top: 50px;">
+    <h1>Custom Maven Badges</h1>
+    <br />
+    <div class="ui fluid input">
+        <input id="repository" class="uk-input" type="text" placeholder="Repository ID">
+    </div>
+    <br />
+    <div class="ui fluid input">
+        <input id="group" class="uk-input" type="text" placeholder="Group ID">
+    </div>
+    <br />
+    <div class="ui fluid input">
+        <input id="artifact" class="uk-input" type="text" placeholder="Artifact ID">
+    </div>
+    <br />
+    <button class="ui fluid button" onclick="displayBuiltUrl()">Build</button>
+    <p id="builtUrl"></p>
+    <script>
+        const url = "{{ url }}";
+        const repository = document.getElementById("repository");
+        const group = document.getElementById("group");
+        const artifact = document.getElementById("artifact");
+
+        const builtUrl = document.getElementById("builtUrl");
+        function displayBuiltUrl() {
+            if (!url.startsWith("http")){
+                url.value = "http://" + url.value;
+            }
+
+            const string = `${url}/${repository.value}/${group.value}/${artifact.value}/badge.png`;
+            builtUrl.innerHTML = `<br /><a href='${string}'>${string}</a>`
+        }
+    </script>
+</div>
 </body>
 </html>
