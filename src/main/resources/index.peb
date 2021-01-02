@@ -4,6 +4,6 @@
     <title>Custom Maven Badges</title>
 </head>
 <body>
-<!-- Content goes here -->
+<p>{{url}}</p>
 </body>
 </html>

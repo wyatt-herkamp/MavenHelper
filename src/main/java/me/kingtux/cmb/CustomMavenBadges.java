@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import io.javalin.plugin.rendering.JavalinRenderer;
+import io.javalin.plugin.rendering.template.JavalinPebble;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,8 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import static io.javalin.plugin.rendering.template.TemplateUtil.model;
 
 public class CustomMavenBadges {
     public static Logger LOGGER = LoggerFactory.getLogger(CustomMavenBadges.class);
@@ -30,9 +34,10 @@ public class CustomMavenBadges {
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
         javalin = Javalin.create(javalinConfig -> {
 
-
         }).start(jsonObject.get("port").getAsInt());
+        JavalinRenderer.register(JavalinPebble.INSTANCE, "peb");
         loadRepos();
+
         javalin.get("/", this::index);
         javalin.get("/:repo/:group/:artifact/badge.png", this::getBadge);
     }
@@ -70,6 +75,6 @@ public class CustomMavenBadges {
     }
 
     private void index(Context context) {
-        context.render("index.html");
+        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString()));
     }
 }
