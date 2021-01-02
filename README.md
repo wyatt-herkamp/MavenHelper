@@ -8,3 +8,4 @@ Generate your own Maven Badges!
   3. Configure the config.json.
   4. Start Application
   5. Access your badge at {URL}/{repo-id}/{group-id}/{artifact-id}/badge.png
+-

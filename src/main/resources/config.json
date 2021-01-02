@@ -1,6 +1,7 @@
 {
   "port": 6456,
   "color": "success",
+  "base_url": "",
   "repositories": [
     {
       "url": "URL",

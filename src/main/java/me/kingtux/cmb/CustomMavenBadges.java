@@ -70,7 +70,6 @@ public class CustomMavenBadges {
     }
 
     private void index(Context context) {
-        context.result("Hi!");
-
+        context.render("index.html");
     }
 }
