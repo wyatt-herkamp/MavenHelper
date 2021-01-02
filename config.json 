@@ -1,0 +1,10 @@
+{
+  "port": 6456,
+  "repositories": [
+    {
+      "url": "URL",
+      "id": "id",
+      "name": ""
+    }
+  ]
+}
