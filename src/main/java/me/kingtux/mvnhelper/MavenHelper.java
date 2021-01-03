@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import io.javalin.http.staticfiles.Location;
 import io.javalin.plugin.rendering.JavalinRenderer;
 import io.javalin.plugin.rendering.template.JavalinPebble;
 import me.kingtux.mvnhelper.handlers.ArtifactHandler;
@@ -46,7 +47,10 @@ public class MavenHelper {
                 .registerTypeAdapter(Repository.class, new RepositorySerializer())
                 .registerTypeAdapter(Artifact.class, new ArtifactSerializer()).create();
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
+        File file1 = new File("static");
+        if(!file1.exists()) file1.mkdir();
         javalin = Javalin.create(javalinConfig -> {
+            javalinConfig.addStaticFiles("static", Location.EXTERNAL);
         }).start(jsonObject.get("port").getAsInt());
         JavalinRenderer.register(JavalinPebble.INSTANCE, "peb");
         loadRepos();
