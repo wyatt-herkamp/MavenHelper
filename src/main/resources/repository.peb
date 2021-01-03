@@ -17,7 +17,7 @@
 </code></pre>
     <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Gradle</h3>
 
-    <pre><code class="plaintext">
+    <pre><code class="plaintext language-gradle">
     maven {
         url = url("{{repository.getURL}}")
     }

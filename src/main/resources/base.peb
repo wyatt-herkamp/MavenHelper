@@ -1,4 +1,5 @@
 {# @pebvariable name="metadata" type="me.kingtux.mvnhelper.web.WebMetadata" #}
+{# @pebvariable name="config" type="me.kingtux.mvnhelper.Config" #}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,16 +13,12 @@
 <meta property="og:image" content="{{ metadata.image }}" />
 <meta property="description" content="{{ metadata.description }}" />
 <meta property="og:description" content="{{ metadata.description }}" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="{{config.semanticCSS}}">
+    <link rel="stylesheet" href="{{config.highlightCSS}}">
+    <script src="{{ config.jquery }}"></script>
 
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-                <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script src="{{config.highlightJS}}"></script>
+        <script src="{{ config.semanticJS }}"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>

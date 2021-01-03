@@ -47,7 +47,6 @@ public class MavenHelper {
                 .registerTypeAdapter(Artifact.class, new ArtifactSerializer()).create();
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
         javalin = Javalin.create(javalinConfig -> {
-
         }).start(jsonObject.get("port").getAsInt());
         JavalinRenderer.register(JavalinPebble.INSTANCE, "peb");
         loadRepos();
@@ -84,7 +83,8 @@ public class MavenHelper {
         builder.setDescription("A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos");
         context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(),
                 "repos", resolver.getRepositoryList(),
-                "metadata", builder.createWebMetadata()));
+                "metadata", builder.createWebMetadata(),
+                "config",config));
     }
 
 

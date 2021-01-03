@@ -48,7 +48,8 @@ public class ArtifactHandler {
                 "badge_url", BadgeHandler.generateBadgeURL(artifact),
                 "artifact_url", generateArtifactURL(artifact),
                 "repo_url", RepositoryHandler.generateArtifactURL(artifact.getRepository()),
-                "metadata", builder.createWebMetadata()));
+                "metadata", builder.createWebMetadata(),
+                "config",mavenHelper.getConfig()));
     }
 
     public void artifactInfoJson(Context context) {

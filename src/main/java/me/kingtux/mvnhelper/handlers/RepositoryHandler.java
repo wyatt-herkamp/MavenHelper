@@ -29,7 +29,8 @@ public class RepositoryHandler {
         builder.setDescription("Maven Info for " + repository.getName() + " at " + repository.getURL());
         context.render("repository.peb", model("repository", repository,
                 "url", MavenHelper.getMavenHelper().getConfig().getBaseURL(),
-                "metadata", builder.createWebMetadata()));
+                "metadata", builder.createWebMetadata(),
+                "config",mavenHelper.getConfig()));
     }
 
     public void repositoryInfoJson(Context context) {

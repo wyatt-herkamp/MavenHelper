@@ -2,6 +2,14 @@
   "port": 6456,
   "color": "success",
   "base_url": "",
+  "cdn": {
+    "highlight-js": "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js",
+    "highlight-css": "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css",
+    "semantic-css": "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css",
+    "semantic-js": "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js",
+    "jquery": "https://code.jquery.com/jquery-3.1.1.min.js"
+  },
+
   "repositories": [
     {
       "url": "URL",
