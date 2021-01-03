@@ -4,8 +4,6 @@
 {# @pebvariable name="artifact_url" type="String" #}
 {# @pebvariable name="repo_url" type="String" #}
 {# @pebvariable name="metadata" type="me.kingtux.mvnhelper.web.WebMetadata" #}
-{# @pebvariable name="config" type="me.kingtux.mvnhelper.Config" #}
-
 {% extends "base.peb" %}
 		{% block content %}
 <div class="ui container" style="margin-top: 50px;">
@@ -17,19 +15,19 @@
 
     <pre><code class="plaintext">{{ badge_url }}</code></pre>
 
-<button class="ui button" onclick="location.href = '{{ repo_url }}';">Repository Info</button>
-
         <h3 class="ui header">Maven Info</h3>
 
-    <pre><code class="language-xml">
-&lt;dependency&gt;
+<pre><code class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;{{artifact.groupId}}&lt;/groupId&gt;
     &lt;artifactId&gt;{{artifact.artifactId}}&lt;/artifactId&gt;
     &lt;version&gt;{{artifact.latestVersion}}&lt;/version&gt;
-&lt;/dependency&gt;
-    </code></pre>
-        <h3 class="ui header">Gradle</h3>
-    <pre><code class="gradle">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
+&lt;/dependency&gt;</code></pre>
+        <h3 class="ui header">Gradle (Groovy)</h3>
+    <pre><code class="plaintext">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
+        <h3 class="ui header">Gradle (Kotlin)</h3>
+    <pre><code class="plaintext">implementation(group = "{{ artifact.groupId }}", name = "{{artifact.artifactId}}", version = "{{artifact.latestVersion}}")</code></pre>
+    <br />
+<button class="ui fluid button" onclick="location.href = '{{ repo_url }}';">Repository Info</button>
 
 </div>
 
