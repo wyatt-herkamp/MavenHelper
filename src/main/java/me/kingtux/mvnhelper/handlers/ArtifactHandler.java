@@ -23,7 +23,14 @@ public class ArtifactHandler {
         if (!repo.equals("null")) {
             Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(repo);
             if (repositoryOptional.isEmpty()) {
-                //TODO improve this
+                WebMetadataBuilder builder = new WebMetadataBuilder();
+                builder.setTitle("MavenHelper");
+                builder.setDescription("404 page");
+                context.render("error/404.peb", model(
+                        "metadata", builder.createWebMetadata(),
+                        "config", mavenHelper.getConfig(),
+                        "missing", "The repository " + repo + " is not found",
+                        "more_info", "Missing Repository"));
                 context.status(404);
                 return;
             }
@@ -37,7 +44,15 @@ public class ArtifactHandler {
         } else {
             artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID);
         }
-        if(artifactOptional.isEmpty()){
+        if (artifactOptional.isEmpty()) {
+            WebMetadataBuilder builder = new WebMetadataBuilder();
+            builder.setTitle("MavenHelper");
+            builder.setDescription("404 page");
+            context.render("error/404.peb", model(
+                    "metadata", builder.createWebMetadata(),
+                    "config", mavenHelper.getConfig(),
+                    "missing", "The artifact " + groupID + ":" + artifactID + " is not found",
+                    "more_info", repo == null ? "Artifact is not available in any registered repo" : "Artifact is not available in " + repo));
             context.status(404);
             return;
         }
@@ -53,7 +68,7 @@ public class ArtifactHandler {
                 "artifact_url", generateArtifactURL(artifact),
                 "repo_url", RepositoryHandler.generateArtifactURL(artifact.getRepository()),
                 "metadata", builder.createWebMetadata(),
-                "config",mavenHelper.getConfig()));
+                "config", mavenHelper.getConfig()));
     }
 
     public void artifactInfoJson(Context context) {

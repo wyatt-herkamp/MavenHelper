@@ -17,9 +17,17 @@ public class RepositoryHandler {
     }
 
     public void repositoryInfo(Context context) {
-        Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
+        String repo = context.pathParam("repo");
+        Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(repo);
         if (repositoryOptional.isEmpty()) {
-            //TODO improve this
+            WebMetadataBuilder builder = new WebMetadataBuilder();
+            builder.setTitle("MavenHelper");
+            builder.setDescription("404 page");
+            context.render("error/404.peb", model(
+                    "metadata", builder.createWebMetadata(),
+                    "config", mavenHelper.getConfig(),
+                    "missing", "The repository " + repo + " is not found",
+                    "more_info", "Missing Repository"));
             context.status(404);
             return;
         }
@@ -30,7 +38,7 @@ public class RepositoryHandler {
         context.render("repository.peb", model("repository", repository,
                 "url", MavenHelper.getMavenHelper().getConfig().getBaseURL(),
                 "metadata", builder.createWebMetadata(),
-                "config",mavenHelper.getConfig()));
+                "config", mavenHelper.getConfig()));
     }
 
     public void repositoryInfoJson(Context context) {

@@ -48,7 +48,7 @@ public class MavenHelper {
                 .registerTypeAdapter(Artifact.class, new ArtifactSerializer()).create();
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
         File file1 = new File("static");
-        if(!file1.exists()) file1.mkdir();
+        if (!file1.exists()) file1.mkdir();
         javalin = Javalin.create(javalinConfig -> {
             javalinConfig.addStaticFiles("static", Location.EXTERNAL);
         }).start(jsonObject.get("port").getAsInt());
@@ -65,6 +65,8 @@ public class MavenHelper {
         javalin.get("/:repo", repositoryHandler::repositoryInfo);
         javalin.get("/:repo/data.json", repositoryHandler::repositoryInfoJson);
         java.util.logging.Logger.getLogger(OkHttpClient.class.getName()).setLevel(Level.FINE);
+
+
     }
 
     public static MavenHelper getMavenHelper() {
@@ -88,7 +90,7 @@ public class MavenHelper {
         context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(),
                 "repos", resolver.getRepositoryList(),
                 "metadata", builder.createWebMetadata(),
-                "config",config));
+                "config", config));
     }
 
 
