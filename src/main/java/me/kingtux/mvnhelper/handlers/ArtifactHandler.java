@@ -32,6 +32,10 @@ public class ArtifactHandler {
             return;
         }
         Artifact artifact1 = artifact.get();
-        context.render("artifact.peb", model("artifact", artifact1));
+        context.render("artifact.peb", model("artifact", artifact1, "url", mavenHelper.getConfig().getBaseURL(), "badge_url", BadgeHandler.generateBadgeURL(artifact1), "artifact_url", generateArtifactURL(artifact1)));
+    }
+
+    public static String generateArtifactURL(Artifact artifact) {
+        return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/" + artifact.getRepository().getRepositoryID() + "/" + artifact.getGroupId() + "/" + artifact.getArtifactId();
     }
 }

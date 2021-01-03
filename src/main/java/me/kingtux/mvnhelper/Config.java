@@ -12,4 +12,7 @@ public class Config {
     public String getColor() {
         return jsonObject.get("color").getAsString();
     }
+    public String getBaseURL() {
+        return jsonObject.get("base_url").getAsString();
+    }
 }

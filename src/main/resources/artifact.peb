@@ -1,4 +1,7 @@
 {# @pebvariable name="artifact" type="me.kingtux.mvnhelper.maven.Artifact" #}
+{# @pebvariable name="url" type="String" #}
+{# @pebvariable name="badge_url" type="String" #}
+{# @pebvariable name="artifact_url" type="String" #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +24,24 @@
 </head>
 <body>
 <div class="ui container" style="margin-top: 50px;">
-    <h1 class="ui header">{{ artifact.artifactId }}</h1>
+    <h1 class="ui header">{{ artifact.groupId }}:{{ artifact.artifactId }}</h1>  <img src="{{ badge_url }}" alt="{{artifact.latestVersion}}">
+            <h3 class="ui header">Markdown Badge</h3>
 
+    <pre><code class="language-markdown">[![Maven Version]({{badge_url}})]({{ artifact_url }})</code></pre>
+                    <h3 class="ui header">Badge URL</h3>
+
+    <pre><code class="plaintext">{{ badge_url }}</code></pre>
+        <h3 class="ui header">Maven Info</h3>
+
+    <pre><code class="language-xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;{{artifact.groupId}}&lt;/groupId&gt;
+    &lt;artifactId&gt;{{artifact.artifactId}}&lt;/artifactId&gt;
+    &lt;version&gt;{{artifact.latestVersion}}&lt;/version&gt;
+&lt;/dependency&gt;
+    </code></pre>
+        <h3 class="ui header">Gradle</h3>
+    <pre><code class="plaintext">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
 
 </div>
 </body>

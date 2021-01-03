@@ -48,6 +48,7 @@ public class MavenResolver {
         ArtifactBuilder artifactBuilder = new ArtifactBuilder();
         artifactBuilder.setArtifactId(artifactRequest.getArtifactID());
         artifactBuilder.setGroupId(artifactRequest.getGroupID());
+        artifactBuilder.setRepository(artifactRequest.getRepository());
         List<String> versions = new ArrayList<>();
         Element root = mavenMetadata.getRootElement();
         Element versioning = root.element("versioning");

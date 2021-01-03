@@ -43,4 +43,8 @@ public class BadgeHandler {
             e.printStackTrace();
         }
     }
+
+    public static String generateBadgeURL(Artifact artifact) {
+        return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/" + artifact.getRepository().getRepositoryID() + "/" + artifact.getGroupId() + "/" + artifact.getArtifactId() + "/badge.png";
+    }
 }
