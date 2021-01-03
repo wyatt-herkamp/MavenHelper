@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import static io.javalin.plugin.rendering.template.TemplateUtil.model;
 
@@ -60,6 +61,7 @@ public class MavenHelper {
         RepositoryHandler repositoryHandler = new RepositoryHandler(this);
         javalin.get("/:repo", repositoryHandler::repositoryInfo);
         javalin.get("/:repo/data.json", repositoryHandler::repositoryInfoJson);
+        java.util.logging.Logger.getLogger(OkHttpClient.class.getName()).setLevel(Level.FINE);
     }
 
     public static MavenHelper getMavenHelper() {

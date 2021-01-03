@@ -40,7 +40,7 @@ public class MavenResolver {
         Document mavenMetadata = null;
         try {
             mavenMetadata = getMavenMetadata(artifactRequest.getGroupID(), artifactRequest.getArtifactID(), artifactRequest.getRepository());
-        } catch (IOException | DocumentException e) {
+        } catch (DocumentException | IOException e) {
             MavenHelper.LOGGER.error("Unable to pull maven-metadata.xml", e);
             return Optional.empty();
         }
@@ -69,17 +69,20 @@ public class MavenResolver {
         return repositoryList.stream().filter(repository -> repository.getRepositoryID().equalsIgnoreCase(id)).findFirst();
     }
 
-    private Document getMavenMetadata(String groupID, String artifactId, Repository repository) throws IOException, DocumentException {
+    private Document getMavenMetadata(String groupID, String artifactId, Repository repository) throws DocumentException, IOException {
         String url = getArtifactURL(groupID, artifactId, repository) + "/maven-metadata.xml";
         MavenHelper.LOGGER.debug("Maven-METADATA.xml URL: " + url);
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Response execute = MavenHelper.CLIENT.newCall(request).execute();
-        if (execute.code() == 404) return null;
-        SAXReader reader = new SAXReader();
-        Document doc = reader.read(execute.body().byteStream());
-        return doc;
+        try (Response execute = MavenHelper.CLIENT.newCall(request).execute()) {
+            if (execute.code() == 404) return null;
+            SAXReader reader = new SAXReader();
+            Document doc = reader.read(execute.body().byteStream());
+            return doc;
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
     private String getArtifactURL(String groupID, String artifactId, Repository repository) {
