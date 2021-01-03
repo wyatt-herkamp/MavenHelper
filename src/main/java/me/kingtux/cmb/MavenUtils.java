@@ -3,46 +3,29 @@ package me.kingtux.cmb;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
+import me.kingtux.cmb.maven.Artifact;
+import me.kingtux.cmb.maven.ArtifactRequest;
+import me.kingtux.cmb.maven.Repository;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MavenUtils {
-    private static LoadingCache<String, String> mavenVersionCache;
+    private static LoadingCache<ArtifactRequest, Artifact> mavenVersionCache;
 
 
     static {
         mavenVersionCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.HOURS).build(
-                new CacheLoader<String, String>() {
-                    public String load(String string) throws Exception {
-
-                        Request request = new Request.Builder()
-                                .url(string)
-                                .build();
-                        Response execute = MavenHelper.CLIENT.newCall(request).execute();
-                        SAXReader reader = new SAXReader();
-                        Document doc = reader.read(execute.body().byteStream());
-                        Element root = doc.getRootElement();
-                        Element versioning = root.element("versioning");
-                        Element latest = versioning.element("latest");
-                        if (latest == null) {
-                            //TODO Improve this.
-                            Element versions = versioning.element("versions");
-                            latest = versions.elements().get(0);
-                        }
-                        String stringValue = latest.getStringValue();
-                        return stringValue;
+                new CacheLoader<>() {
+                    public Artifact load(ArtifactRequest data){
+                        return MavenHelper.getMavenHelper().getResolver().artifact(data).orElse(null);
                     }
                 }
         );
     }
 
-    public static String getLatestVersion(String path) throws ExecutionException {
-        return mavenVersionCache.get(path);
+    public static Artifact getLatestVersion(String groupID, String artifactID, Repository repository) throws ExecutionException {
+        return mavenVersionCache.get(new ArtifactRequest(groupID, artifactID, repository));
     }
+
 }

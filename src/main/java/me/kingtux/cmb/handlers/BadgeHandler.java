@@ -4,6 +4,7 @@ import io.javalin.http.Context;
 import me.kingtux.cmb.BadgeUtils;
 import me.kingtux.cmb.MavenHelper;
 import me.kingtux.cmb.MavenUtils;
+import me.kingtux.cmb.maven.Artifact;
 import me.kingtux.cmb.maven.Repository;
 
 import java.io.File;
@@ -21,24 +22,21 @@ public class BadgeHandler {
 
 
     public void getBadge(Context context) {
+        System.out.println("HI");
         Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
         if (repositoryOptional.isEmpty()) {
-            //TODO improve this
+            System.out.println("Null");
             context.status(404);
             return;
         }
+        System.out.println("HI2");
         Repository repository = repositoryOptional.get();
         String groupID = context.pathParam("group");
-        String artifact = context.pathParam("artifact");
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(repository.getURL()).append("/");
-        stringBuilder.append(groupID.replace(".", "/")).append("/");
-        stringBuilder.append(artifact).append("/");
-        stringBuilder.append("maven-metadata.xml");
-        String path = stringBuilder.toString();
+        String artifactID = context.pathParam("artifact");
+
         try {
-            String latestVersion = MavenUtils.getLatestVersion(path);
-            File badge = BadgeUtils.getBadge(latestVersion, repository.getName(), mavenHelper.getConfig().getColor());
+            Artifact artifact = MavenUtils.getLatestVersion(groupID, artifactID, repository);
+            File badge = BadgeUtils.getBadge(artifact.getLatestVersion(), repository.getName(), mavenHelper.getConfig().getColor());
             context.contentType("image/png");
             context.result(new FileInputStream(badge));
         } catch (ExecutionException | FileNotFoundException e) {

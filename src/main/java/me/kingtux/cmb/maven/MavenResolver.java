@@ -18,6 +18,9 @@ public class MavenResolver {
 
     public MavenResolver(List<Repository> repositoryList) {
         this.repositoryList = repositoryList;
+        for (Repository repository : repositoryList) {
+            System.out.println("repository = " + repository);
+        }
     }
 
     public Optional<Artifact> artifact(String groupID, String artifactId) {
@@ -29,17 +32,22 @@ public class MavenResolver {
     }
 
     public Optional<Artifact> artifact(String groupID, String artifactId, Repository repository) {
+        return artifact(new ArtifactRequest(groupID, artifactId, repository));
+
+    }
+
+    public Optional<Artifact> artifact(ArtifactRequest artifactRequest) {
         Document mavenMetadata = null;
         try {
-            mavenMetadata = getMavenMetadata(groupID, artifactId, repository);
+            mavenMetadata = getMavenMetadata(artifactRequest.getGroupID(), artifactRequest.getArtifactID(), artifactRequest.getRepository());
         } catch (IOException | DocumentException e) {
             MavenHelper.LOGGER.error("Unable to pull maven-metadata.xml", e);
             return Optional.empty();
         }
         if (mavenMetadata == null) return Optional.empty();
         ArtifactBuilder artifactBuilder = new ArtifactBuilder();
-        artifactBuilder.setArtifactId(artifactId);
-        artifactBuilder.setGroupId(groupID);
+        artifactBuilder.setArtifactId(artifactRequest.getArtifactID());
+        artifactBuilder.setGroupId(artifactRequest.getGroupID());
         List<String> versions = new ArrayList<>();
         Element root = mavenMetadata.getRootElement();
         Element versioning = root.element("versioning");
@@ -57,7 +65,7 @@ public class MavenResolver {
     }
 
     public Optional<Repository> getRepository(String id) {
-        return repositoryList.stream().filter(repository -> repository.getRepositoryID().equals(id)).findFirst();
+        return repositoryList.stream().filter(repository -> repository.getRepositoryID().equalsIgnoreCase(id)).findFirst();
     }
 
     private Document getMavenMetadata(String groupID, String artifactId, Repository repository) throws IOException, DocumentException {

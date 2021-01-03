@@ -1,6 +1,7 @@
 package me.kingtux.cmb.maven;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Artifact {
     private String artifactId;
@@ -35,5 +36,28 @@ public class Artifact {
 
     public String getLatestVersion() {
         return latestVersion;
+    }
+
+    @Override
+    public String toString() {
+        return "Artifact{" +
+                "artifactId='" + artifactId + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", repository=" + repository.toString() +
+                ", latestVersion='" + latestVersion + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artifact artifact = (Artifact) o;
+        return Objects.equals(getArtifactId(), artifact.getArtifactId()) && Objects.equals(getGroupId(), artifact.getGroupId()) && Objects.equals(getRepository(), artifact.getRepository()) && Objects.equals(getVersions(), artifact.getVersions()) && Objects.equals(getLatestVersion(), artifact.getLatestVersion());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getArtifactId(), getGroupId(), getRepository(), getVersions(), getLatestVersion());
     }
 }

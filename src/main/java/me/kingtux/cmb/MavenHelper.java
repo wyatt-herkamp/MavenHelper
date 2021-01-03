@@ -32,8 +32,10 @@ public class MavenHelper {
     public static final OkHttpClient CLIENT = new OkHttpClient();
     private Config config;
     private MavenResolver resolver;
+    private static MavenHelper mavenHelper;
 
     public MavenHelper(File file) throws FileNotFoundException {
+        mavenHelper = this;
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
         javalin = Javalin.create(javalinConfig -> {
 
@@ -48,6 +50,10 @@ public class MavenHelper {
         javalin.get("/:repo/:group/:artifact", artifactHandler::artifactInfo);
         RepositoryHandler repositoryHandler = new RepositoryHandler(this);
         javalin.get("/:repo", repositoryHandler::repositoryInfo);
+    }
+
+    public static MavenHelper getMavenHelper() {
+        return mavenHelper;
     }
 
     private void loadRepos() {
@@ -66,7 +72,7 @@ public class MavenHelper {
 
 
     public Config getConfig() {
-        return null;
+        return config;
     }
 
     public MavenResolver getResolver() {
