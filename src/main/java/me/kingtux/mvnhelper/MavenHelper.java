@@ -40,17 +40,21 @@ public class MavenHelper {
     private Config config;
     private MavenResolver resolver;
     private static MavenHelper mavenHelper;
+    private ArtifactSaver artifactSaver;
 
     public MavenHelper(File file) throws FileNotFoundException {
         mavenHelper = this;
         gson = new GsonBuilder()
                 .registerTypeAdapter(Repository.class, new RepositorySerializer())
-                .registerTypeAdapter(Artifact.class, new ArtifactSerializer()).create();
+                .registerTypeAdapter(Artifact.class, new ArtifactSerializer()).setPrettyPrinting().create();
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
         File file1 = new File("static");
         if (!file1.exists()) file1.mkdir();
+        File sitemap = new File("sitemap");
+        if (!sitemap.exists()) sitemap.mkdir();
         javalin = Javalin.create(javalinConfig -> {
             javalinConfig.addStaticFiles("static", Location.EXTERNAL);
+            javalinConfig.addStaticFiles("sitemap", Location.EXTERNAL);
         }).start(jsonObject.get("port").getAsInt());
         JavalinRenderer.register(JavalinPebble.INSTANCE, "peb");
         loadRepos();
@@ -62,11 +66,11 @@ public class MavenHelper {
         javalin.get("/:repo/:group/:artifact", artifactHandler::artifactInfo);
         javalin.get("/:repo/:group/:artifact/data.json", artifactHandler::artifactInfoJson);
         RepositoryHandler repositoryHandler = new RepositoryHandler(this);
-        javalin.get("/:repo", repositoryHandler::repositoryInfo);
-        javalin.get("/:repo/data.json", repositoryHandler::repositoryInfoJson);
+        javalin.get("/repo/:repo", repositoryHandler::repositoryInfo);
+        javalin.get("/repo/:repo/data.json", repositoryHandler::repositoryInfoJson);
         java.util.logging.Logger.getLogger(OkHttpClient.class.getName()).setLevel(Level.FINE);
 
-
+        new SitemapThread(this);
     }
 
     public static MavenHelper getMavenHelper() {
@@ -80,8 +84,12 @@ public class MavenHelper {
             repositoryList.add(new Repository(asJsonObject));
         }
         resolver = new MavenResolver(repositoryList);
+        artifactSaver = new ArtifactSaver();
     }
 
+    public ArtifactSaver getArtifactSaver() {
+        return artifactSaver;
+    }
 
     private void index(Context context) {
         WebMetadataBuilder builder = new WebMetadataBuilder();
@@ -91,6 +99,10 @@ public class MavenHelper {
                 "repos", resolver.getRepositoryList(),
                 "metadata", builder.createWebMetadata(),
                 "config", config));
+    }
+
+    public Javalin getJavalin() {
+        return javalin;
     }
 
 

@@ -2,6 +2,7 @@
   "port": 6456,
   "color": "success",
   "base_url": "",
+  "sitemap-timeout": 3600000,
   "cdn": {
     "highlight-js": "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js",
     "highlight-css": "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css",

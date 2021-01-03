@@ -13,6 +13,10 @@ public class Config {
         return jsonObject.get("color").getAsString();
     }
 
+    public int getSitemapTimeout() {
+        return jsonObject.get("sitemap-timeout").getAsInt();
+    }
+
     public String getBaseURL() {
         return jsonObject.get("base_url").getAsString();
     }

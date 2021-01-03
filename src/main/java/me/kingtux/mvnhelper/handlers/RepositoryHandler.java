@@ -55,6 +55,6 @@ public class RepositoryHandler {
     }
 
     public static String generateArtifactURL(Repository repository) {
-        return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/" + repository.getRepositoryID();
+        return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/repo/" + repository.getRepositoryID();
     }
 }

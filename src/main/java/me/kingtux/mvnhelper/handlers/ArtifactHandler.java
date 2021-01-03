@@ -6,6 +6,7 @@ import me.kingtux.mvnhelper.maven.Artifact;
 import me.kingtux.mvnhelper.maven.Repository;
 import me.kingtux.mvnhelper.web.WebMetadataBuilder;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import static io.javalin.plugin.rendering.template.TemplateUtil.model;
@@ -57,7 +58,11 @@ public class ArtifactHandler {
             return;
         }
         Artifact artifact = artifactOptional.get();
-
+        try {
+            mavenHelper.getArtifactSaver().saveArtifactIfNotFound(artifact);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         WebMetadataBuilder builder = new WebMetadataBuilder();
         builder.setTitle(groupID + ":" + artifactID);
         builder.setDescription("Maven Info for " + groupID + ":" + artifactID);
