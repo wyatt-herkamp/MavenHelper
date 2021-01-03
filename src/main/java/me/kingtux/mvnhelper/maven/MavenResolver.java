@@ -19,7 +19,7 @@ public class MavenResolver {
     public MavenResolver(List<Repository> repositoryList) {
         this.repositoryList = repositoryList;
         for (Repository repository : repositoryList) {
-            System.out.println("repository = " + repository);
+            MavenHelper.LOGGER.debug("repository = " + repository);
         }
     }
 

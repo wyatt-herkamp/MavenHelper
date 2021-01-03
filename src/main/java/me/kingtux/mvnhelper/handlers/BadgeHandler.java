@@ -22,14 +22,11 @@ public class BadgeHandler {
 
 
     public void getBadge(Context context) {
-        System.out.println("HI");
         Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
         if (repositoryOptional.isEmpty()) {
-            System.out.println("Null");
             context.status(404);
             return;
         }
-        System.out.println("HI2");
         Repository repository = repositoryOptional.get();
         String groupID = context.pathParam("group");
         String artifactID = context.pathParam("artifact");
