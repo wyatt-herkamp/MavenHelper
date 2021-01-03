@@ -32,6 +32,19 @@ public class RepositoryHandler {
                 "metadata", builder.createWebMetadata()));
     }
 
+    public void repositoryInfoJson(Context context) {
+        Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
+        if (repositoryOptional.isEmpty()) {
+            //TODO improve this
+            context.status(404);
+            return;
+        }
+        String jsonObject = mavenHelper.getGson().toJson(repositoryOptional.get());
+        context.contentType("application/json");
+        context.result(jsonObject);
+
+    }
+
     public static String generateArtifactURL(Repository repository) {
         return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/" + repository.getRepositoryID();
     }

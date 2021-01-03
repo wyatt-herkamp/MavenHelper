@@ -1,6 +1,7 @@
 package me.kingtux.mvnhelper;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.javalin.Javalin;
@@ -10,8 +11,11 @@ import io.javalin.plugin.rendering.template.JavalinPebble;
 import me.kingtux.mvnhelper.handlers.ArtifactHandler;
 import me.kingtux.mvnhelper.handlers.BadgeHandler;
 import me.kingtux.mvnhelper.handlers.RepositoryHandler;
+import me.kingtux.mvnhelper.maven.Artifact;
 import me.kingtux.mvnhelper.maven.MavenResolver;
 import me.kingtux.mvnhelper.maven.Repository;
+import me.kingtux.mvnhelper.maven.gson.ArtifactSerializer;
+import me.kingtux.mvnhelper.maven.gson.RepositorySerializer;
 import me.kingtux.mvnhelper.web.WebMetadataBuilder;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
@@ -28,7 +32,7 @@ import static io.javalin.plugin.rendering.template.TemplateUtil.model;
 public class MavenHelper {
     public static Logger LOGGER = LoggerFactory.getLogger(MavenHelper.class);
     private Javalin javalin;
-    private Gson gson = new Gson();
+    private Gson gson;
     private JsonObject jsonObject;
     public static final OkHttpClient CLIENT = new OkHttpClient();
     private Config config;
@@ -37,6 +41,9 @@ public class MavenHelper {
 
     public MavenHelper(File file) throws FileNotFoundException {
         mavenHelper = this;
+        gson = new GsonBuilder()
+                .registerTypeAdapter(Repository.class, new RepositorySerializer())
+                .registerTypeAdapter(Artifact.class, new ArtifactSerializer()).create();
         jsonObject = gson.fromJson(new FileReader(file), JsonObject.class);
         javalin = Javalin.create(javalinConfig -> {
 
@@ -49,8 +56,10 @@ public class MavenHelper {
         javalin.get("/:repo/:group/:artifact/badge.png", badgeHandler::getBadge);
         ArtifactHandler artifactHandler = new ArtifactHandler(this);
         javalin.get("/:repo/:group/:artifact", artifactHandler::artifactInfo);
+        javalin.get("/:repo/:group/:artifact/data.json", artifactHandler::artifactInfoJson);
         RepositoryHandler repositoryHandler = new RepositoryHandler(this);
         javalin.get("/:repo", repositoryHandler::repositoryInfo);
+        javalin.get("/:repo/data.json", repositoryHandler::repositoryInfoJson);
     }
 
     public static MavenHelper getMavenHelper() {
@@ -79,6 +88,10 @@ public class MavenHelper {
 
     public Config getConfig() {
         return config;
+    }
+
+    public Gson getGson() {
+        return gson;
     }
 
     public MavenResolver getResolver() {

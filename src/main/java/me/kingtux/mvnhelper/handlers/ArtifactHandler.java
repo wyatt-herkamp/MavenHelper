@@ -46,6 +46,27 @@ public class ArtifactHandler {
                 "metadata", builder.createWebMetadata()));
     }
 
+    public void artifactInfoJson(Context context) {
+        Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
+        if (repositoryOptional.isEmpty()) {
+            //TODO improve this
+            context.status(404);
+            return;
+        }
+        Repository repository = repositoryOptional.get();
+        String groupID = context.pathParam("group");
+        String artifactID = context.pathParam("artifact");
+        Optional<Artifact> artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
+        if (artifactOptional.isEmpty()) {
+            context.status(404);
+            return;
+        }
+        Artifact artifact = artifactOptional.get();
+        String jsonObject = mavenHelper.getGson().toJson(artifact);
+        context.contentType("application/json");
+        context.result(jsonObject);
+    }
+
     public static String generateArtifactURL(Artifact artifact) {
         return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/" + artifact.getRepository().getRepositoryID() + "/" + artifact.getGroupId() + "/" + artifact.getArtifactId();
     }
