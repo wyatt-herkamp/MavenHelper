@@ -1,11 +1,11 @@
-package me.kingtux.cmb.handlers;
+package me.kingtux.mvnhelper.handlers;
 
 import io.javalin.http.Context;
-import me.kingtux.cmb.BadgeUtils;
-import me.kingtux.cmb.MavenHelper;
-import me.kingtux.cmb.MavenUtils;
-import me.kingtux.cmb.maven.Artifact;
-import me.kingtux.cmb.maven.Repository;
+import me.kingtux.mvnhelper.BadgeUtils;
+import me.kingtux.mvnhelper.MavenHelper;
+import me.kingtux.mvnhelper.MavenUtils;
+import me.kingtux.mvnhelper.maven.Artifact;
+import me.kingtux.mvnhelper.maven.Repository;
 
 import java.io.File;
 import java.io.FileInputStream;

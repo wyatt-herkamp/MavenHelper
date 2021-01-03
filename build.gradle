@@ -33,7 +33,8 @@ test {
 jar {
 
     manifest {
-        attributes 'Main-Class' : 'me.kingtux.cmb.CMBMain'
+
+        attributes 'Main-Class' : 'me.kingtux.mvnhelper.MavenHelperMain'
     }
 }
 shadowJar {

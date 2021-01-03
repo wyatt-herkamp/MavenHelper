@@ -1,4 +1,4 @@
-package me.kingtux.cmb;
+package me.kingtux.mvnhelper;
 
 import org.apache.commons.io.IOUtils;
 

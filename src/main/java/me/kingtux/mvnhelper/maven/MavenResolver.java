@@ -1,6 +1,6 @@
-package me.kingtux.cmb.maven;
+package me.kingtux.mvnhelper.maven;
 
-import me.kingtux.cmb.MavenHelper;
+import me.kingtux.mvnhelper.MavenHelper;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.dom4j.Document;

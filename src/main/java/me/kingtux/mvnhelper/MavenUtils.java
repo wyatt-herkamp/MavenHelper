@@ -1,11 +1,11 @@
-package me.kingtux.cmb;
+package me.kingtux.mvnhelper;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import me.kingtux.cmb.maven.Artifact;
-import me.kingtux.cmb.maven.ArtifactRequest;
-import me.kingtux.cmb.maven.Repository;
+import me.kingtux.mvnhelper.maven.Artifact;
+import me.kingtux.mvnhelper.maven.ArtifactRequest;
+import me.kingtux.mvnhelper.maven.Repository;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;

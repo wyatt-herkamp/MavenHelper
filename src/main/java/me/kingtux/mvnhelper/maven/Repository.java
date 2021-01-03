@@ -1,4 +1,4 @@
-package me.kingtux.cmb.maven;
+package me.kingtux.mvnhelper.maven;
 
 import com.google.gson.JsonObject;
 

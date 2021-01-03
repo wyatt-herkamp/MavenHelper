@@ -1,4 +1,4 @@
-package me.kingtux.cmb;
+package me.kingtux.mvnhelper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -7,11 +7,11 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.plugin.rendering.JavalinRenderer;
 import io.javalin.plugin.rendering.template.JavalinPebble;
-import me.kingtux.cmb.handlers.ArtifactHandler;
-import me.kingtux.cmb.handlers.BadgeHandler;
-import me.kingtux.cmb.handlers.RepositoryHandler;
-import me.kingtux.cmb.maven.MavenResolver;
-import me.kingtux.cmb.maven.Repository;
+import me.kingtux.mvnhelper.handlers.ArtifactHandler;
+import me.kingtux.mvnhelper.handlers.BadgeHandler;
+import me.kingtux.mvnhelper.handlers.RepositoryHandler;
+import me.kingtux.mvnhelper.maven.MavenResolver;
+import me.kingtux.mvnhelper.maven.Repository;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
