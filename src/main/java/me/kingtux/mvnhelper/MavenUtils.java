@@ -7,6 +7,7 @@ import me.kingtux.mvnhelper.maven.Artifact;
 import me.kingtux.mvnhelper.maven.ArtifactRequest;
 import me.kingtux.mvnhelper.maven.Repository;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -17,8 +18,10 @@ public class MavenUtils {
     static {
         mavenVersionCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.HOURS).build(
                 new CacheLoader<>() {
-                    public Artifact load(ArtifactRequest data){
-                        return MavenHelper.getMavenHelper().getResolver().artifact(data).orElse(null);
+                    public Artifact load(ArtifactRequest data) throws IOException {
+                        Artifact artifact = MavenHelper.getMavenHelper().getResolver().artifact(data).orElse(null);
+                        if(artifact!=null) MavenHelper.getMavenHelper().getArtifactSaver().saveArtifactIfNotFound(artifact);
+                        return artifact;
                     }
                 }
         );
