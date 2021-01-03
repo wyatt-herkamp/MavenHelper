@@ -24,4 +24,8 @@ public class RepositoryHandler {
         }
         context.render("repository.peb", model("repository", repositoryOptional.get()));
     }
+
+    public static String generateArtifactURL(Repository repository) {
+        return MavenHelper.getMavenHelper().getConfig().getBaseURL() + "/" + repository.getRepositoryID();
+    }
 }
