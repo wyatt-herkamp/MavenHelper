@@ -8,11 +8,16 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Custom Maven Badges</title>
+    <title>{{ artifact.groupId }}:{{ artifact.artifactId }}</title>
 
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-
+<meta property="og:title" content="{{ artifact.groupId }}:{{ artifact.artifactId }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:image" content="{{badge_url}}" />
+<meta property="description" content="Maven Info for {{ artifact.groupId }}:{{ artifact.artifactId }}" />
+<meta property="og:description" content="Maven Info for {{ artifact.groupId }}:{{ artifact.artifactId }}" />
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

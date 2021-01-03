@@ -1,9 +1,15 @@
+{# @pebvariable name="url" type="String" #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Custom Maven Badges</title>
+    <title>Maven helper</title>
+<meta property="og:title" content="Maven Helper" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{url}}" />
 
+<meta property="og:description" content="A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos" />
+<meta property="description" content="A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 
     <script

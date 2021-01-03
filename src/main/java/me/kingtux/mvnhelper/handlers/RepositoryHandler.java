@@ -22,7 +22,7 @@ public class RepositoryHandler {
             context.status(404);
             return;
         }
-        context.render("repository.peb", model("repository", repositoryOptional.get()));
+        context.render("repository.peb", model("repository", repositoryOptional.get(), "url", MavenHelper.getMavenHelper().getConfig().getBaseURL()));
     }
 
     public static String generateArtifactURL(Repository repository) {
