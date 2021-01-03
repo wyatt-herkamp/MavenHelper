@@ -29,7 +29,7 @@
 &lt;/dependency&gt;
     </code></pre>
         <h3 class="ui header">Gradle</h3>
-    <pre><code class="plaintext language-gradle">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
+    <pre><code class="gradle">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
 
 </div>
 

@@ -20,7 +20,15 @@
 
     <script charset="utf-8" src="{{config.highlightJS}}"></script>
         <script src="{{ config.semanticJS }}"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initHighlightingOnLoad();
+    document.addEventListener('DOMContentLoaded', event => {
+  document.querySelectorAll('.gradle').forEach(block => {
+    if(hljs.getLanguage('gradle') == undefined)
+        block.className = "plaintext"
+    hljs.highlightBlock(block);
+  });
+});
+    </script>
 </head>
 <body>
 		{% block content %}{% endblock %}
