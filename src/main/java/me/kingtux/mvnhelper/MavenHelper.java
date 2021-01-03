@@ -12,6 +12,7 @@ import me.kingtux.mvnhelper.handlers.BadgeHandler;
 import me.kingtux.mvnhelper.handlers.RepositoryHandler;
 import me.kingtux.mvnhelper.maven.MavenResolver;
 import me.kingtux.mvnhelper.maven.Repository;
+import me.kingtux.mvnhelper.web.WebMetadataBuilder;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +68,11 @@ public class MavenHelper {
 
 
     private void index(Context context) {
-        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(), "repos", resolver.getRepositoryList()));
+        WebMetadataBuilder builder = new WebMetadataBuilder();
+        builder.setTitle("MavenHelper");
+        builder.setDescription("A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos");
+        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(), "repos", resolver.getRepositoryList(),
+                "metadata", builder.createWebMetadata()));
     }
 
 

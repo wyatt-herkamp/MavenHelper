@@ -4,6 +4,7 @@ import io.javalin.http.Context;
 import me.kingtux.mvnhelper.MavenHelper;
 import me.kingtux.mvnhelper.maven.Artifact;
 import me.kingtux.mvnhelper.maven.Repository;
+import me.kingtux.mvnhelper.web.WebMetadataBuilder;
 
 import java.util.Optional;
 
@@ -26,13 +27,23 @@ public class ArtifactHandler {
         Repository repository = repositoryOptional.get();
         String groupID = context.pathParam("group");
         String artifactID = context.pathParam("artifact");
-        Optional<Artifact> artifact = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
-        if (artifact.isEmpty()) {
+        Optional<Artifact> artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
+        if (artifactOptional.isEmpty()) {
             context.status(404);
             return;
         }
-        Artifact artifact1 = artifact.get();
-        context.render("artifact.peb", model("artifact", artifact1, "url", mavenHelper.getConfig().getBaseURL(), "badge_url", BadgeHandler.generateBadgeURL(artifact1), "artifact_url", generateArtifactURL(artifact1), "repo_url", RepositoryHandler.generateArtifactURL(artifact1.getRepository())));
+        Artifact artifact = artifactOptional.get();
+
+        WebMetadataBuilder builder = new WebMetadataBuilder();
+        builder.setTitle(groupID + ":" + artifactID);
+        builder.setDescription("Maven Info for " + groupID + ":" + artifactID);
+        builder.setImage(BadgeHandler.generateBadgeURL(artifact));
+        context.render("artifact.peb", model("artifact", artifact,
+                "url", mavenHelper.getConfig().getBaseURL(),
+                "badge_url", BadgeHandler.generateBadgeURL(artifact),
+                "artifact_url", generateArtifactURL(artifact),
+                "repo_url", RepositoryHandler.generateArtifactURL(artifact.getRepository()),
+                "metadata", builder.createWebMetadata()));
     }
 
     public static String generateArtifactURL(Artifact artifact) {

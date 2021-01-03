@@ -3,6 +3,7 @@ package me.kingtux.mvnhelper.handlers;
 import io.javalin.http.Context;
 import me.kingtux.mvnhelper.MavenHelper;
 import me.kingtux.mvnhelper.maven.Repository;
+import me.kingtux.mvnhelper.web.WebMetadataBuilder;
 
 import java.util.Optional;
 
@@ -22,7 +23,13 @@ public class RepositoryHandler {
             context.status(404);
             return;
         }
-        context.render("repository.peb", model("repository", repositoryOptional.get(), "url", MavenHelper.getMavenHelper().getConfig().getBaseURL()));
+        Repository repository = repositoryOptional.get();
+        WebMetadataBuilder builder = new WebMetadataBuilder();
+        builder.setTitle(repository.getName() + " Repo");
+        builder.setDescription("Maven Info for " + repository.getName() + " at " + repository.getURL());
+        context.render("repository.peb", model("repository", repository,
+                "url", MavenHelper.getMavenHelper().getConfig().getBaseURL(),
+                "metadata", builder.createWebMetadata()));
     }
 
     public static String generateArtifactURL(Repository repository) {

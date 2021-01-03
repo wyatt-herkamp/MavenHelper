@@ -3,32 +3,9 @@
 {# @pebvariable name="badge_url" type="String" #}
 {# @pebvariable name="artifact_url" type="String" #}
 {# @pebvariable name="repo_url" type="String" #}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <title>{{ artifact.groupId }}:{{ artifact.artifactId }}</title>
-
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-<meta property="og:title" content="{{ artifact.groupId }}:{{ artifact.artifactId }}" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="{{url}}" />
-<meta property="og:image" content="{{badge_url}}" />
-<meta property="description" content="Maven Info for {{ artifact.groupId }}:{{ artifact.artifactId }}" />
-<meta property="og:description" content="Maven Info for {{ artifact.groupId }}:{{ artifact.artifactId }}" />
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-</head>
-<body>
+{# @pebvariable name="metadata" type="me.kingtux.mvnhelper.web.WebMetadata" #}
+{% extends "base.peb" %}
+		{% block content %}
 <div class="ui container" style="margin-top: 50px;">
     <h1 class="ui header">{{ artifact.groupId }}:{{ artifact.artifactId }}</h1>  <img src="{{ badge_url }}" alt="{{artifact.latestVersion}}">
             <h3 class="ui header">Markdown Badge</h3>
@@ -53,5 +30,5 @@
     <pre><code class="plaintext">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
 
 </div>
-</body>
-</html>
+
+{% endblock %}

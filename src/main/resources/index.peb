@@ -1,24 +1,9 @@
 {# @pebvariable name="url" type="String" #}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Maven helper</title>
-<meta property="og:title" content="Maven Helper" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="{{url}}" />
+{# @pebvariable name="metadata" type="me.kingtux.mvnhelper.web.WebMetadata" #}
 
-<meta property="og:description" content="A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos" />
-<meta property="description" content="A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+{% extends "base.peb" %}
+		{% block content %}
 
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-</head>
-<body>
 <div class="ui container" style="margin-top: 50px;">
     <h1>Custom Maven Badges</h1>
     <br />
@@ -53,6 +38,4 @@
 window.location.replace(string);
         }
     </script>
-</div>
-</body>
-</html>
+{% endblock %}
