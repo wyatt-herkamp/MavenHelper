@@ -33,6 +33,10 @@ public class BadgeHandler {
 
         try {
             Artifact artifact = MavenUtils.getLatestVersion(groupID, artifactID, repository);
+            if(artifact==null){
+                context.status(404);
+                return;
+            }
             File badge = BadgeUtils.getBadge(artifact.getLatestVersion(), repository.getName(), mavenHelper.getConfig().getColor());
             context.contentType("image/png");
             context.result(new FileInputStream(badge));

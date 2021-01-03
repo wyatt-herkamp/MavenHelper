@@ -37,6 +37,10 @@ public class ArtifactHandler {
         } else {
             artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID);
         }
+        if(artifactOptional.isEmpty()){
+            context.status(404);
+            return;
+        }
         Artifact artifact = artifactOptional.get();
 
         WebMetadataBuilder builder = new WebMetadataBuilder();
