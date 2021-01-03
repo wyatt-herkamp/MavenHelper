@@ -19,15 +19,15 @@
 
         <h3 class="ui header">Maven Info</h3>
 
-    <pre><code class="language-xml">
-&lt;dependency&gt;
+<pre><code class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;{{artifact.groupId}}&lt;/groupId&gt;
     &lt;artifactId&gt;{{artifact.artifactId}}&lt;/artifactId&gt;
     &lt;version&gt;{{artifact.latestVersion}}&lt;/version&gt;
-&lt;/dependency&gt;
-    </code></pre>
-        <h3 class="ui header">Gradle</h3>
+&lt;/dependency&gt;</code></pre>
+        <h3 class="ui header">Gradle (Groovy)</h3>
     <pre><code class="plaintext">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
+        <h3 class="ui header">Gradle (Kotlin)</h3>
+    <pre><code class="plaintext">implementation(group = "{{ artifact.groupId }}", name = "{{artifact.artifactId}}", version = "{{artifact.latestVersion}}")</code></pre>
 
 </div>
 

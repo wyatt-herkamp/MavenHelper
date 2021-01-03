@@ -9,18 +9,17 @@
     <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Maven</h3>
 
 <!-- Please save me. -->
-    <pre><code class="language-xml">
-&lt;repository&gt;
+<pre><code class="language-xml">&lt;repository&gt;
     &lt;id&gt;{{repository.getRepositoryID}}&lt;/id&gt;
     &lt;url&gt;{{repository.getURL}}&lt;/url&gt;
-&lt;/repository&gt;
-</code></pre>
-    <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Gradle</h3>
+&lt;/repository&gt;</code></pre>
+    <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Gradle (Groovy)</h3>
 
-    <pre><code class="plaintext">
-    maven {
-        url = url("{{repository.getURL}}")
-    }
-</code></pre>
+<pre><code class="plaintext">maven {
+    url "{{repository.getURL}}"
+}</code></pre>
+
+    <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Gradle (Kotlin)</h3>
+<pre><code class="plaintext">maven("{{repository.getURL}}")</code></pre>
 </div>
 {% endblock %}

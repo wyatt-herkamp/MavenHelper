@@ -6,7 +6,7 @@
 		{% block content %}
 
 <div class="ui container" style="margin-top: 50px;">
-    <h1>Custom Maven Badges</h1>
+    <h1>Maven Helper</h1>
     <br />
     <div class="ui fluid input">
         <input id="repository" class="uk-input" type="text" placeholder="Repository ID">
@@ -20,7 +20,7 @@
         <input id="artifact" class="uk-input" type="text" placeholder="Artifact ID">
     </div>
     <br />
-    <button class="ui fluid button" onclick="displayBuiltUrl()">Build</button>
+    <button class="ui fluid button" onclick="displayBuiltUrl()">Go</button>
     <p id="builtUrl"></p>
     <script>
 const url = "{{ url }}";
