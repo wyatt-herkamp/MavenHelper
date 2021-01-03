@@ -18,19 +18,24 @@ public class ArtifactHandler {
     }
 
     public void artifactInfo(Context context) {
-        Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
-        if (repositoryOptional.isEmpty()) {
-            //TODO improve this
-            context.status(404);
-            return;
+        String repo = context.pathParam("repo");
+        Repository repository = null;
+        if (!repo.equals("null")) {
+            Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(repo);
+            if (repositoryOptional.isEmpty()) {
+                //TODO improve this
+                context.status(404);
+                return;
+            }
+            repository = repositoryOptional.get();
         }
-        Repository repository = repositoryOptional.get();
         String groupID = context.pathParam("group");
         String artifactID = context.pathParam("artifact");
-        Optional<Artifact> artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
-        if (artifactOptional.isEmpty()) {
-            context.status(404);
-            return;
+        Optional<Artifact> artifactOptional;
+        if (repository != null) {
+            artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
+        } else {
+            artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID);
         }
         Artifact artifact = artifactOptional.get();
 
@@ -47,16 +52,25 @@ public class ArtifactHandler {
     }
 
     public void artifactInfoJson(Context context) {
-        Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(context.pathParam("repo"));
-        if (repositoryOptional.isEmpty()) {
-            //TODO improve this
-            context.status(404);
-            return;
+        String repo = context.pathParam("repo");
+        Repository repository = null;
+        if (!repo.equals("null")) {
+            Optional<Repository> repositoryOptional = mavenHelper.getResolver().getRepository(repo);
+            if (repositoryOptional.isEmpty()) {
+                //TODO improve this
+                context.status(404);
+                return;
+            }
+            repository = repositoryOptional.get();
         }
-        Repository repository = repositoryOptional.get();
         String groupID = context.pathParam("group");
         String artifactID = context.pathParam("artifact");
-        Optional<Artifact> artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
+        Optional<Artifact> artifactOptional;
+        if (repository != null) {
+            artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID, repository);
+        } else {
+            artifactOptional = mavenHelper.getResolver().artifact(groupID, artifactID);
+        }
         if (artifactOptional.isEmpty()) {
             context.status(404);
             return;
