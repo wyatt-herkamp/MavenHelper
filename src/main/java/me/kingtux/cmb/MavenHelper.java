@@ -9,6 +9,7 @@ import io.javalin.plugin.rendering.JavalinRenderer;
 import io.javalin.plugin.rendering.template.JavalinPebble;
 import me.kingtux.cmb.handlers.ArtifactHandler;
 import me.kingtux.cmb.handlers.BadgeHandler;
+import me.kingtux.cmb.handlers.RepositoryHandler;
 import me.kingtux.cmb.maven.MavenResolver;
 import me.kingtux.cmb.maven.Repository;
 import okhttp3.OkHttpClient;
@@ -45,6 +46,8 @@ public class MavenHelper {
         javalin.get("/:repo/:group/:artifact/badge.png", badgeHandler::getBadge);
         ArtifactHandler artifactHandler = new ArtifactHandler(this);
         javalin.get("/:repo/:group/:artifact", artifactHandler::artifactInfo);
+        RepositoryHandler repositoryHandler = new RepositoryHandler(this);
+        javalin.get("/:repo", repositoryHandler::repositoryInfo);
     }
 
     private void loadRepos() {
