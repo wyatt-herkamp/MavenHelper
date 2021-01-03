@@ -13,11 +13,12 @@
 <meta property="og:image" content="{{ metadata.image }}" />
 <meta property="description" content="{{ metadata.description }}" />
 <meta property="og:description" content="{{ metadata.description }}" />
+  <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{config.semanticCSS}}">
-    <link rel="stylesheet" href="{{config.highlightCSS}}">
+    <link  rel="stylesheet" href="{{config.highlightCSS}}">
     <script src="{{ config.jquery }}"></script>
 
-    <script src="{{config.highlightJS}}"></script>
+    <script charset="utf-8" src="{{config.highlightJS}}"></script>
         <script src="{{ config.semanticJS }}"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>

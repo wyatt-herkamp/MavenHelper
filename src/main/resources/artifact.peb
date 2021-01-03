@@ -4,6 +4,8 @@
 {# @pebvariable name="artifact_url" type="String" #}
 {# @pebvariable name="repo_url" type="String" #}
 {# @pebvariable name="metadata" type="me.kingtux.mvnhelper.web.WebMetadata" #}
+{# @pebvariable name="config" type="me.kingtux.mvnhelper.Config" #}
+
 {% extends "base.peb" %}
 		{% block content %}
 <div class="ui container" style="margin-top: 50px;">

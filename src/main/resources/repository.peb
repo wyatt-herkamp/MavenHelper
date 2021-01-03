@@ -1,6 +1,8 @@
 {# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}
 {# @pebvariable name="url" type="String" #}
 {# @pebvariable name="metadata" type="me.kingtux.mvnhelper.web.WebMetadata" #}
+{# @pebvariable name="config" type="me.kingtux.mvnhelper.Config" #}
+
 {% extends "base.peb" %}
 
 		{% block content %}
