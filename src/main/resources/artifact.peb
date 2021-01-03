@@ -1,0 +1,52 @@
+{# @pebvariable name="artifact" type="me.kingtux.mvnhelper.maven.Artifact" #}
+{# @pebvariable name="url" type="String" #}
+{# @pebvariable name="badge_url" type="String" #}
+{# @pebvariable name="artifact_url" type="String" #}
+{# @pebvariable name="repo_url" type="String" #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Custom Maven Badges</title>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="ui container" style="margin-top: 50px;">
+    <h1 class="ui header">{{ artifact.groupId }}:{{ artifact.artifactId }}</h1>  <img src="{{ badge_url }}" alt="{{artifact.latestVersion}}">
+            <h3 class="ui header">Markdown Badge</h3>
+
+    <pre><code class="language-markdown">[![Maven Version]({{badge_url}})]({{ artifact_url }})</code></pre>
+                    <h3 class="ui header">Badge URL</h3>
+
+    <pre><code class="plaintext">{{ badge_url }}</code></pre>
+
+<button class="ui button" onclick="location.href = '{{ repo_url }}';">Repository Info</button>
+
+        <h3 class="ui header">Maven Info</h3>
+
+    <pre><code class="language-xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;{{artifact.groupId}}&lt;/groupId&gt;
+    &lt;artifactId&gt;{{artifact.artifactId}}&lt;/artifactId&gt;
+    &lt;version&gt;{{artifact.latestVersion}}&lt;/version&gt;
+&lt;/dependency&gt;
+    </code></pre>
+        <h3 class="ui header">Gradle</h3>
+    <pre><code class="plaintext">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
+
+</div>
+</body>
+</html>

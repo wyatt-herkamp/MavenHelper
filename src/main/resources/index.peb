@@ -42,8 +42,9 @@
                 url.value = "http://" + url.value;
             }
 
-            const string = `${url}/${repository.value}/${group.value}/${artifact.value}/badge.png`;
-            builtUrl.innerHTML = `<br /><a href='${string}'>${string}</a>`
+            const string = `${url}/${repository.value}/${group.value}/${artifact.value}`;
+
+window.location.replace(string);
         }
     </script>
 </div>
