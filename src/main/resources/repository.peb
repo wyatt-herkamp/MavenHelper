@@ -15,11 +15,11 @@
 &lt;/repository&gt;</code></pre>
     <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Gradle (Groovy)</h3>
 
-<pre><code class="plaintext">maven {
+<pre><code class="gradle">maven {
     url "{{repository.getURL}}"
 }</code></pre>
 
     <h3 class="ui header">{# @pebvariable name="repository" type="me.kingtux.mvnhelper.maven.Repository" #}Gradle (Kotlin)</h3>
-<pre><code class="plaintext">maven("{{repository.getURL}}")</code></pre>
+<pre><code class="gradle">maven("{{repository.getURL}}")</code></pre>
 </div>
 {% endblock %}

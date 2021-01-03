@@ -23,9 +23,9 @@
     &lt;version&gt;{{artifact.latestVersion}}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
         <h3 class="ui header">Gradle (Groovy)</h3>
-    <pre><code class="plaintext">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
+    <pre><code class="gradle">implementation group: '{{ artifact.groupId }}', name: '{{artifact.artifactId}}', version: '{{artifact.latestVersion}}'</code></pre>
         <h3 class="ui header">Gradle (Kotlin)</h3>
-    <pre><code class="plaintext">implementation(group = "{{ artifact.groupId }}", name = "{{artifact.artifactId}}", version = "{{artifact.latestVersion}}")</code></pre>
+    <pre><code class="gradle">implementation(group = "{{ artifact.groupId }}", name = "{{artifact.artifactId}}", version = "{{artifact.latestVersion}}")</code></pre>
     <br />
 <button class="ui fluid button" onclick="location.href = '{{ repo_url }}';">Repository Info</button>
 
