@@ -8,8 +8,16 @@
 <div class="ui container" style="margin-top: 50px;">
     <h1>Maven Helper</h1>
     <br />
-    <div class="ui fluid input">
-        <input id="repository" class="uk-input" type="text" placeholder="Repository ID">
+    <form>
+    <div class="ui fluid search selection dropdown">
+        <input type="hidden" name="repository" id="repository">
+        <i class="dropdown icon"></i>
+        <div class="default text">Repository</div>
+        <div class="menu">
+        {% for repo in repos %}
+            <div class="item" data-value="{{ repo.repositoryID }}">{{ repo.name }}</div>
+        {% endfor %}
+        </div>
     </div>
     <br />
     <div class="ui fluid input">
@@ -20,9 +28,12 @@
         <input id="artifact" class="uk-input" type="text" placeholder="Artifact ID">
     </div>
     <br />
-    <button class="ui fluid button" onclick="displayBuiltUrl()">Go</button>
+    <button type="button" class="ui fluid button" onclick="displayBuiltUrl()">Go</button>
+    </form>
     <p id="builtUrl"></p>
     <script>
+    $('.ui.dropdown').dropdown();
+
 const url = "{{ url }}";
 const repository = document.getElementById("repository");
 const group = document.getElementById("group");
@@ -42,5 +53,6 @@ function displayBuiltUrl() {
 
     window.location.replace(string);
 }
+
     </script>
 {% endblock %}
