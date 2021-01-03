@@ -24,7 +24,7 @@ public class MavenUtils {
                         Request request = new Request.Builder()
                                 .url(string)
                                 .build();
-                        Response execute = CustomMavenBadges.CLIENT.newCall(request).execute();
+                        Response execute = MavenHelper.CLIENT.newCall(request).execute();
                         SAXReader reader = new SAXReader();
                         Document doc = reader.read(execute.body().byteStream());
                         Element root = doc.getRootElement();

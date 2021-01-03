@@ -32,8 +32,8 @@ public class BadgeUtils {
                         Request request = new Request.Builder()
                                 .url(format)
                                 .build();
-                        CustomMavenBadges.LOGGER.debug("Badge URL: "+format);
-                        Response execute = CustomMavenBadges.CLIENT.newCall(request).execute();
+                        MavenHelper.LOGGER.debug("Badge URL: "+format);
+                        Response execute = MavenHelper.CLIENT.newCall(request).execute();
                         File file = new File(cacheFolder, String.format(cacheFile, value.getLeft(), value.getMiddle()));
                         if (!file.exists()) {
 
