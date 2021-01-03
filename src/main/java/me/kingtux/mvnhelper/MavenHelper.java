@@ -71,7 +71,8 @@ public class MavenHelper {
         WebMetadataBuilder builder = new WebMetadataBuilder();
         builder.setTitle("MavenHelper");
         builder.setDescription("A tool for having displaying data about Maven Repos and Depends from self-hosted Maven Repos");
-        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(), "repos", resolver.getRepositoryList(),
+        context.render("index.peb", model("url", jsonObject.get("base_url").getAsString(),
+                "repos", resolver.getRepositoryList(),
                 "metadata", builder.createWebMetadata()));
     }
 
