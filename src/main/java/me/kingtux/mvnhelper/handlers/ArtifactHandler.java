@@ -31,6 +31,7 @@ public class ArtifactHandler {
             context.status(404);
             return;
         }
-        context.render("artifact.peb", model(artifact, artifact.get()));
+        Artifact artifact1 = artifact.get();
+        context.render("artifact.peb", model("artifact", artifact1));
     }
 }
