@@ -56,6 +56,12 @@ public class MavenResolver {
         if (latest != null) {
             artifactBuilder.setLatestVersion(latest.getStringValue());
         }
+        if (latest == null) {
+            Element release = versioning.element("release");
+            if (release != null) {
+                artifactBuilder.setLatestVersion(release.getStringValue());
+            }
+        }
         Element versionsElement = versioning.element("versions");
         for (Element element : versionsElement.elements()) {
             versions.add(element.getStringValue());
