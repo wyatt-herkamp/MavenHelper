@@ -61,13 +61,13 @@ public class MavenHelper {
         config = new Config(jsonObject);
         javalin.get("/", this::index);
         BadgeHandler badgeHandler = new BadgeHandler(this);
-        javalin.get("/:repo/:group/:artifact/badge.png", badgeHandler::getBadge);
+        javalin.get("/{repo}/{group}/{artifact}/badge.png", badgeHandler::getBadge);
         ArtifactHandler artifactHandler = new ArtifactHandler(this);
-        javalin.get("/:repo/:group/:artifact", artifactHandler::artifactInfo);
-        javalin.get("/:repo/:group/:artifact/data.json", artifactHandler::artifactInfoJson);
+        javalin.get("/{repo}/{group}/{artifact}", artifactHandler::artifactInfo);
+        javalin.get("/{repo}/{group}/{artifact}/data.json", artifactHandler::artifactInfoJson);
         RepositoryHandler repositoryHandler = new RepositoryHandler(this);
-        javalin.get("/repo/:repo", repositoryHandler::repositoryInfo);
-        javalin.get("/repo/:repo/data.json", repositoryHandler::repositoryInfoJson);
+        javalin.get("/repo/{repo}", repositoryHandler::repositoryInfo);
+        javalin.get("/repo/{repo}/data.json", repositoryHandler::repositoryInfoJson);
         java.util.logging.Logger.getLogger(OkHttpClient.class.getName()).setLevel(Level.FINE);
 
         new SitemapThread(this);
