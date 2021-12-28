@@ -21,7 +21,7 @@ dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     implementation('com.squareup.okhttp3:okhttp:4.9.3')
     implementation("org.slf4j:slf4j-log4j12:2.0.0-alpha5")
-    implementation("org.apache.logging.log4j:log4j-core:2.15.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.17.0")
     implementation group: 'log4j', name: 'apache-log4j-extras', version: '1.2.17'
     implementation group: 'com.jcabi', name: 'jcabi-log', version: '0.20.1'
     implementation('com.google.guava:guava:31.0.1-jre')
