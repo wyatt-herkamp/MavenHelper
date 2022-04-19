@@ -2,7 +2,7 @@
 [![Build Status](https://ci.potatocorp.dev/job/MavenHelper/badge/icon)](https://ci.potatocorp.dev/job/MavenHelper/)
 
 ## Can I see it running?
- Yes! [here](https://mvnhelper.potatocorp.dev/)
+ No, I have taken the project down. With the release of my new alternative project [Nitro_Repo](https://github.com/wherkamp/nitro_repo). This is a general artifact manager but it also includes badges. If you want a full artifact_manager I highly recommend Nitro_Repo. This project is still supported. 
 ## What can this project do?
  1. Generate Maven Version Badges for custom repositories. Such as [![Maven Version](https://mvnhelper.potatocorp.dev/tuxjsql/me.kingtux/tuxorm/badge.png)](https://mvnhelper.potatocorp.dev/tuxjsql/me.kingtux/tuxorm)
  2. Give Data about accessing repo and depend. [example](https://mvnhelper.potatocorp.dev/tuxjsql/me.kingtux/tuxorm)
